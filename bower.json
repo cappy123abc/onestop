@@ -1,0 +1,37 @@
+{
+  "name": "onestop-md",
+  "version": "0.0.0",
+  "homepage": "https://github.com/cappy123abc/onestop-md",
+  "authors": [
+    "Caleb Pusey <caleb@lie-nielsen.com>"
+  ],
+  "description": "Production Planning Tool for Tryton",
+  "main": "indexhtml",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-animate": "~1.4.7",
+    "angular-bootstrap": "~0.14.3",
+    "angular-aria": "~1.4.7",
+    "angular-ui-grid": "~3.0.7",
+    "angular-route": "~1.4.7",
+    "angular-material": "~0.11.4",
+    "bootstrap": "~3.3.5",
+    "angular": "~1.4.7",
+    "ngstorage": "~0.3.9",
+    "angular-local-storage": "~0.2.3",
+    "list-to-tree": "~0.0.6",
+    "angular-tree-control": "^0.2.27",
+    "material-design-icons": "^2.2.3",
+    "d3": "^4.4.0",
+    "angular-ui-router": "^0.3.2"
+  }
+}

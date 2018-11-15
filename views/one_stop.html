@@ -1,0 +1,122 @@
+  <div  ng-controller="onestopController">
+    <md-toolbar layout="row" layout-align="center center">
+      <md-button ng-click="toggleSidenav('left')" hide-gt-md aria-label="Menu">
+         <ng-md-icon icon="menu"></ng-md-icon>
+      </md-button>
+      <h1 >One<span class="big-red-one">Stop</span> Planner</h1>
+    </md-toolbar>
+    <div layout="row" flex layout-padding layout-margin>
+        <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+            <div layout-padding>
+                <h1 class=".md-display-2">Options</h1>
+            </div>
+            <md-divider></md-divider>
+             <md-switch ng-model="bucket_filter.active" aria-label="Switch 1" class="md-title">
+                Filter Results
+            </md-switch>
+            <md-radio-group ng-model="bucket_filter.type" ng-show="bucket_filter.active==true">
+                <md-radio-button value="inv" aria-label="Inventory">
+                Show Only Items Negative in Future
+                </md-radio-button>
+                <md-radio-button value="forc" aria-label="Forecast">
+                Show Only Items Below Inventory Threshold in Future ({{ bucket_filter.thresh }}%)
+                </md-radio-button>
+            </md-radio-group>
+               <md-slider ng-model="bucket_filter.thresh" min="0" max="100" aria-label="volume" id="volume-slider" class="md-accent"
+                 md-range md-discrete ng-show="bucket_filter.active">Threshold Percent</md-slider> 
+            <md-divider></md-divider>
+            <md-divider></md-divider>
+            <md-radio-group ng-model="planning_types.type" ng-change="onChange(planning_types.type)">
+              <md-radio-button value="mfg"   class="md-primary"> Manufactured </md-radio-button>
+              <md-radio-button  value="resale"> Resale </md-radio-button>
+            </md-radio-group>
+          <md-button ng-click="showMfg()" ng-hide="isOpenRight()" class="md-raised md-primary">
+            Select Items
+          </md-button>
+            <md-divider></md-divider>
+            <h3 class=".md-title">Bucket Size</h3>
+            <md-radio-group ng-model="bucket_size">
+              <md-radio-button value="Weeks" class="md-primary">Weeks</md-radio-button>
+              <md-radio-button value="Days" >Days</md-radio-button>
+            </md-radio-group>
+            <h3 class=".md-title">Number of Buckets</h3>
+            <div layout="row" layout-padding>
+                <md-slider flex="60" min="0" max="16" ng-model="no_of_buckets" aria-label="Bucket Size" id="bucket-slider">
+                </md-slider>
+                <span flex="40" class="radioValue">{{ no_of_buckets }} {{ bucket_size }}</span>
+            <!--- Add this to trick out {{value === 1 ? singular : plural}} --->
+            </div>
+            <md-divider></md-divider>
+            <h3 class=".md-title">Inputs and Outputs</h3>
+              <div>
+                <md-checkbox ng-model="ins_and_outs.sales.state" aria-label="Sales Orders">
+                Sales Orders
+                </md-checkbox>
+              </div>
+              <div>
+                <md-checkbox ng-model="ins_and_outs.forecasts.state" aria-label="Transfer Orders">
+                Forecasts
+                </md-checkbox>
+              </div>
+              <div>
+                <md-checkbox ng-model="ins_and_outs.productions.state" aria-label="Work Orders">
+                 Work Orders
+                </md-checkbox>
+              </div>
+              <div>
+                <md-checkbox ng-model="ins_and_outs.purchases.state" aria-label="Purchase Orders">
+                Purchase Orders
+                </md-checkbox>
+              </div>
+            <md-divider></md-divider>
+            <h3 class=".md-title">Customer Types</h3>
+              <div>
+                <md-checkbox ng-model="customer_class.wholesale" aria-label="wholesale">
+                Wholesale
+                </md-checkbox>
+              </div>
+              <div>
+                <md-checkbox ng-model="customer_class.retail" aria-label="retail">
+                Retail
+                </md-checkbox>
+              </div>
+        </md-sidenav>
+    <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
+
+      <md-toolbar class="md-theme-light">
+        <h1 class="md-toolbar-tools">Select Categories</h1>
+      </md-toolbar>
+      <md-content layout-padding="" class="#loading-bar-container">
+        <treecontrol class="tree-light"
+           tree-model="categories"
+           options="treeOptions"
+           selected-nodes="cat_sel"
+           on-selection="catSelected(node, selected)">
+           {{node.name}}
+        </treecontrol>
+
+        <md-button ng-click="selectItemsClose()" class="md-primary">
+          Done!
+        </md-button>
+      </md-content>
+
+    </md-sidenav>
+    <div layout="column">
+        <div layout="row" ng-model="responses" layout-padding>{{ responses }}</div>
+        <div layout="row" layout-padding>
+            <h1 class=".md-display-2" flex>Stock Outlook</h1>
+                <div layout="row" layout-sm="column" layout-align="space-around">
+                      <md-progress-circular md-mode="indeterminate" ng-show="progress"></md-progress-circular>
+                </div>
+                <md-button ng-click="runStockOutlook()" class="md-fab md-accent" aria-label="Run Planner">
+                    <md-icon md-svg-src="bower_components/material-design-icons/navigation/svg/production/ic_refresh_24px.svg"></md-icon>
+                </md-button>
+        </div>
+        <div layout="row">
+            <md-content>
+            <div id="outlook_grid"  ui-grid="outlook_grid" ui-grid-tree-view class="myGrid"></div>
+            </md-content>
+        </div>
+    </div>
+    </div>
+  </div>

@@ -1,0 +1,21 @@
+<div ui-view="" class="ng-scope"><div layout="column" layout-align="center center" layout-margin="" class="ng-scope">
+<md-whiteframe class="md-whiteframe-z1 login-whiteframe layout-align-center-center layout-column">
+    <p class="md-display-1 text-muted">
+      <span>Sign In</span>
+    </p>
+    <form ng-submit="submit(loginForm)" name="loginForm" class="login-form ng-pristine layout-column ng-invalid ng-invalid-required">
+      <md-input-container class="md-input-has-value">
+        <label for="input_23">Username</label>
+        <input type="text" ng-model="login.username" required="" autocapitalize="off" class="ng-pristine ng-untouched ng-valid md-input ng-valid-required" id="input_23" aria-required="false" aria-invalid="false">
+      </md-input-container>
+      <md-input-container class="">
+        <label for="input_24">Password</label>
+        <input type="password" ng-model="login.password" required="" class="ng-pristine ng-untouched md-input ng-invalid ng-invalid-required" id="input_24" aria-required="true" aria-invalid="true">
+      </md-input-container>
+      <button class="md-primary md-raised md-button md-ink-ripple" ng-transclude="" aria-label="Login" type="submit"><span class="ng-scope">
+        Sign In
+      </span></button>
+      <!-- ngIf: loggingIn -->
+    </form>
+  </md-whiteframe>
+</div>
